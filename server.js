@@ -21,13 +21,8 @@ const db = mysql.createConnection(
     console.log(`Connected to the employee_db database.`)
   );
   
-  // Create a EE
-//   app.post('/', (req, res) =>
-//   db.query('S', function (err, results){
-//       res.json(results);
-//   })
-//   );
-  
+
+
   
   
   app.get('/api/Department', (req, res) =>
@@ -49,3 +44,48 @@ const db = mysql.createConnection(
       res.json(results);
   })
   );
+
+
+  app.post('/api/Department', ({ body }, res) => {
+    const sql = `INSERT INTO department (dedpartment_id)
+      VALUES (?)`;
+    const params = [body.department_id];
+    
+    db.query(sql, params, (err, result) => {
+      if (err) {
+        res.status(400).json({ error: err.message });
+        return;
+      }
+      res.json({
+        message: 'success',
+        data: body
+      });
+    });
+  });
+
+  
+  app.post('/api/Department', ({ body }, res) => {
+    const sql = `INSERT INTO department (dedpartment_id)
+      VALUES (?)`;
+    const params = [body.department_id];
+    
+    db.query(sql, params, (err, result) => {
+      if (err) {
+        res.status(400).json({ error: err.message });
+        return;
+      }
+      res.json({
+        message: 'success',
+        data: body
+      });
+    });
+  });
+
+  app.use((req, res) => {
+    res.status(404).end();
+  });
+  
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+  
