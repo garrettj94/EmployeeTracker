@@ -1,6 +1,8 @@
 const express = require('express');
 // Import and require mysql2
 const mysql = require('mysql2');
+const inquirer = require('inquirer');
+const { response } = require('express');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -22,9 +24,21 @@ const db = mysql.createConnection(
   );
   
 
-
+  inquirer
+  .prompt([
   
-  
+    {
+      type: 'choice',
+      message: 'View All ',
+      choices: ['Departments', 'roles', 'employees']
+    },
+    {
+      type: 'choice',
+      message: 'Add ',
+      choices: ['add Departments', 'add roles', ' add employees', 'update employee role']
+    },
+  ])
+   .then(response)
   app.get('/api/Department', (req, res) =>
   db.query('SELECT * from Department', function (err, results){
       res.json(results);
@@ -89,3 +103,5 @@ const db = mysql.createConnection(
     console.log(`Server running on port ${PORT}`);
   });
   
+    
+    
