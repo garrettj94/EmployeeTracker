@@ -10,7 +10,7 @@
   - [Questions](#questions)
   
   ##description:
-    This had us test knowledge on website testing docs
+    This had us test knowledge on mysql and seeds
 
     ##installation:
     none
